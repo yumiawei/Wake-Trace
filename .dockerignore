@@ -10,7 +10,6 @@ dist
 build
 *.egg-info
 web/.git
-web/.openai
 web/node_modules
 web/dist
 web/AGENTS.md
