@@ -8,7 +8,7 @@ from difflib import SequenceMatcher
 from zoneinfo import ZoneInfo
 
 from .config import Settings
-from .storage import SQLiteStore
+from .storage import Store
 
 
 @dataclass(frozen=True, slots=True)
@@ -19,7 +19,7 @@ class GateDecision:
 
 
 class WakePolicy:
-    def __init__(self, settings: Settings, store: SQLiteStore):
+    def __init__(self, settings: Settings, store: Store):
         self.settings = settings
         self.store = store
         self.rng = random.SystemRandom()

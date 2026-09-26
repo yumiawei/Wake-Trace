@@ -25,6 +25,7 @@ dependencies = [
 
 [project.optional-dependencies]
 webpush = ["pywebpush>=2,<3"]
+postgres = ["psycopg2-binary>=2.9,<3"]
 dev = ["pytest>=8,<9", "ruff>=0.6,<1"]
 
 [project.scripts]

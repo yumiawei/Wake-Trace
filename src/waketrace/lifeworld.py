@@ -8,7 +8,7 @@ from zoneinfo import ZoneInfo
 
 from .config import Settings
 from .models import WakeResult, WakeSeed
-from .storage import SQLiteStore
+from .storage import Store
 from .tools import RegisteredTool, ToolRegistry
 
 
@@ -22,7 +22,7 @@ class SelectedSeed:
 class LifeWorld:
     """把外部事件、线头和自由时段整理成一次只包含一个入口的醒来种子。"""
 
-    def __init__(self, settings: Settings, store: SQLiteStore):
+    def __init__(self, settings: Settings, store: Store):
         self.settings = settings
         self.store = store
 
@@ -69,7 +69,7 @@ class LifeWorld:
             )
 
 
-def build_lifeworld_tools(store: SQLiteStore) -> ToolRegistry:
+def build_lifeworld_tools(store: Store) -> ToolRegistry:
     registry = ToolRegistry()
 
     registry.register(

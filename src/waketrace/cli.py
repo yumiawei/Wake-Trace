@@ -15,12 +15,12 @@ from .models import WakeSeed
 from .notifiers import ConsoleNotifier, WebPushNotifier
 from .providers import OpenAICompatibleProvider
 from .scheduler import WakeScheduler
-from .storage import SQLiteStore
+from .storage import open_store
 
 
 def build_engine(settings: Settings, *, console: bool = False) -> WakeEngine:
     settings.ensure_runtime_dirs()
-    store = SQLiteStore(settings.db_path)
+    store = open_store(settings.db_path)
     notifier = ConsoleNotifier() if console else WebPushNotifier(settings, store)
     return WakeEngine(
         settings,
@@ -62,7 +62,7 @@ def main() -> None:
     settings = Settings()
     if args.command == "init-db":
         settings.ensure_runtime_dirs()
-        SQLiteStore(settings.db_path)
+        open_store(settings.db_path)
         print(f"initialized {settings.db_path}")
     elif args.command == "serve":
         uvicorn.run(create_app(settings), host=args.host, port=args.port)
@@ -91,7 +91,7 @@ def main() -> None:
         print(f"outcome={result.outcome} next={result.next_wake_at.isoformat()}")
     elif args.command == "timeline":
         settings.ensure_runtime_dirs()
-        rows = SQLiteStore(settings.db_path).recent_timeline(args.limit)
+        rows = open_store(settings.db_path).recent_timeline(args.limit)
         if args.as_json:
             print(json.dumps(rows, ensure_ascii=False, indent=2, default=str))
         else:

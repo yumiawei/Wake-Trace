@@ -21,7 +21,7 @@ from .models import WakeSeed
 from .notifiers import WebPushNotifier
 from .providers import OpenAICompatibleProvider
 from .scheduler import WakeScheduler
-from .storage import SQLiteStore
+from .storage import open_store
 
 
 class WakeRequest(BaseModel):
@@ -60,7 +60,7 @@ def create_app(
     settings = settings or Settings()
     settings.ensure_runtime_dirs()
     if engine is None:
-        store = SQLiteStore(settings.db_path)
+        store = open_store(settings.db_path)
         engine = WakeEngine(
             settings,
             store,

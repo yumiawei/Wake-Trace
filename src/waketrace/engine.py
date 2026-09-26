@@ -12,7 +12,7 @@ from .notifiers import Notifier
 from .policy import WakePolicy
 from .prompt import build_system_prompt, build_wake_input
 from .providers import LanguageProvider, ProviderError
-from .storage import SQLiteStore
+from .storage import Store
 from .tools import ToolRegistry
 
 
@@ -24,7 +24,7 @@ class WakeEngine:
     def __init__(
         self,
         settings: Settings,
-        store: SQLiteStore,
+        store: Store,
         provider: LanguageProvider,
         tools: ToolRegistry,
         notifier: Notifier,

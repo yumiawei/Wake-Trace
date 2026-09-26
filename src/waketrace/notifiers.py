@@ -5,7 +5,7 @@ import logging
 from typing import Protocol
 
 from .config import Settings
-from .storage import SQLiteStore
+from .storage import Store
 
 logger = logging.getLogger(__name__)
 
@@ -21,7 +21,7 @@ class ConsoleNotifier:
 
 
 class WebPushNotifier:
-    def __init__(self, settings: Settings, store: SQLiteStore):
+    def __init__(self, settings: Settings, store: Store):
         self.settings = settings
         self.store = store
 
